@@ -6,19 +6,19 @@
 
 using namespace std;
 
-// Structure to represent an undirected graph
+
 struct Graph {
-    int V; // Number of vertices
-    vector<vector<int>> adj; // Adjacency list representation
+    int V;
+    vector<vector<int>> adj; 
 };
 
-// Add edge to the graph
+
 void addEdge(Graph &graph, int u, int v) {
     graph.adj[u].push_back(v);
     graph.adj[v].push_back(u);
 }
 
-// Parallel Breadth First Search algorithm
+
 void parallelBFS(Graph &graph, int source) {
     int V = graph.V;
     vector<bool> visited(V, false);
@@ -29,7 +29,7 @@ void parallelBFS(Graph &graph, int source) {
     while (!q.empty()) {
         int u = q.front();
         q.pop();
-        cout << u << " "; // Process the current node
+        cout << u << " "; 
 #pragma omp parallel for
         for (int i = 0; i < graph.adj[u].size(); i++) {
             int v = graph.adj[u][i];
@@ -41,7 +41,7 @@ void parallelBFS(Graph &graph, int source) {
     }
 }
 
-// Parallel Depth First Search algorithm
+
 void parallelDFS(Graph &graph, int source) {
     int V = graph.V;
     vector<bool> visited(V, false);
@@ -52,7 +52,7 @@ void parallelDFS(Graph &graph, int source) {
         int u = stk.top();
         stk.pop();
         if (!visited[u]) {
-            cout << u << " "; // Process the current node
+            cout << u << " "; 
             visited[u] = true;
 #pragma omp parallel for
             for (int i = 0; i < graph.adj[u].size(); i++) {
@@ -67,7 +67,7 @@ void parallelDFS(Graph &graph, int source) {
 
 int main() {
     Graph graph;
-    int V, E; // Number of vertices and edges
+    int V, E; 
     cout << "Enter the number of vertices: ";
     cin >> V;
     cout << "Enter the number of edges: ";
@@ -93,18 +93,18 @@ int main() {
 
     if (choice == 1) {
         cout << "Breadth First Search Traversal: ";
-        parallelBFS(graph, 0); // Start BFS from node 0
+        parallelBFS(graph, 0); 
         cout << endl;
     } else if (choice == 2) {
         cout << "Depth First Search Traversal: ";
-        parallelDFS(graph, 0); // Start DFS from node 0
+        parallelDFS(graph, 0); 
         cout << endl;
     } else if (choice == 3) {
         cout << "Breadth First Search Traversal: ";
-        parallelBFS(graph, 0); // Start BFS from node 0
+        parallelBFS(graph, 0); 
         cout << endl;
         cout << "Depth First Search Traversal: ";
-        parallelDFS(graph, 0); // Start DFS from node 0
+        parallelDFS(graph, 0); 
         cout << endl;
     } else {
         cout << "Invalid choice!" << endl;
