@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Function to find minimum element using parallel reduction
 int parallelMin(int arr[], int n) {
     int min_val = numeric_limits<int>::max();
 #pragma omp parallel for reduction(min:min_val)
@@ -16,7 +15,7 @@ int parallelMin(int arr[], int n) {
     return min_val;
 }
 
-// Function to find maximum element using parallel reduction
+
 int parallelMax(int arr[], int n) {
     int max_val = numeric_limits<int>::min();
 #pragma omp parallel for reduction(max:max_val)
@@ -28,7 +27,6 @@ int parallelMax(int arr[], int n) {
     return max_val;
 }
 
-// Function to find sum using parallel reduction
 int parallelSum(int arr[], int n) {
     int sum = 0;
 #pragma omp parallel for reduction(+:sum)
@@ -38,7 +36,7 @@ int parallelSum(int arr[], int n) {
     return sum;
 }
 
-// Function to find average using parallel reduction
+
 double parallelAverage(int arr[], int n) {
     int sum = parallelSum(arr, n);
     return static_cast<double>(sum) / n;
@@ -55,19 +53,17 @@ int main() {
         cin >> arr[i];
     }
 
-    // Find and print minimum element
+    
     int min_val = parallelMin(arr, n);
     cout << "Minimum value: " << min_val << endl;
 
-    // Find and print maximum element
     int max_val = parallelMax(arr, n);
     cout << "Maximum value: " << max_val << endl;
 
-    // Find and print sum
     int sum = parallelSum(arr, n);
     cout << "Sum: " << sum << endl;
 
-    // Find and print average
+   
     double average = parallelAverage(arr, n);
     cout << "Average: " << average << endl;
 
