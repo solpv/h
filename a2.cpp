@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Merge function to merge two sorted subarrays
 void merge(int arr[], int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -40,7 +39,7 @@ void merge(int arr[], int l, int m, int r) {
     }
 }
 
-// Parallel Bubble Sort algorithm
+
 void parallelBubbleSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         bool swapped = false;
@@ -56,7 +55,7 @@ void parallelBubbleSort(int arr[], int n) {
     }
 }
 
-// Parallel Merge Sort algorithm
+
 void parallelMergeSort(int arr[], int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
@@ -71,7 +70,7 @@ void parallelMergeSort(int arr[], int l, int r) {
     }
 }
 
-// Function to print an array
+
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
@@ -90,14 +89,14 @@ int main() {
     int arr[] = {12, 11, 13, 5, 6, 7};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    int tempArr[n]; // Temporary array for merge sort
+    int tempArr[n]; 
 
     switch (choice) {
         case 1: {
             cout << "Original array: ";
             printArray(arr, n);
 
-            // Parallel Bubble Sort
+           
             parallelBubbleSort(arr, n);
 
             cout << "Sorted array (Parallel Bubble Sort): ";
@@ -108,7 +107,7 @@ int main() {
             cout << "Original array: ";
             printArray(arr, n);
 
-            // Parallel Merge Sort
+           
             parallelMergeSort(arr, 0, n - 1);
 
             cout << "Sorted array (Parallel Merge Sort): ";
@@ -119,7 +118,7 @@ int main() {
             cout << "Original array: ";
             printArray(arr, n);
 
-            // Parallel Bubble Sort
+            
             #pragma omp parallel sections
             {
                 #pragma omp section
